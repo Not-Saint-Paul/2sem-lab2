@@ -4,207 +4,189 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab02
+namespace Lab02 
 {
-    class InfoFolder
+   
+    internal class Program 
     {
-        public string FilenameExpansion;
-        public string Name;
-        public string Author;
-        public string[] KeyWords;
-        public string Topic;
-        public string FilePath;
-    }
-    class MSWordInfoFolder : InfoFolder
-    {
-        public static new string FilenameExpansion = "MS Word";
-    }
-    class PDFileInfoFolder : InfoFolder
-    {
-        public static new string FilenameExpansion = "PDF";
-    }
-    class MSExcelInfoFolder : InfoFolder
-    {
-        public static new string FilenameExpansion = "MS Excel";
-    }
-    class TXTInfoFolder : InfoFolder
-    {
-        public static new string FilenameExpansion = "txt";
-    }
-    class HTMLInfoFolder : InfoFolder
-    {
-        public static new string FilenameExpansion = "HTML";
-    }
-    public sealed class Singleton
-    {
-        private Singleton()
+        public sealed class Singleton 
         {
-        }
-
-        private static Singleton source = null;
-        private static readonly object threadlock = new object();
-
-        public static Singleton Source
-        {
-            get
+            public static Singleton Instance 
             {
-                lock (threadlock)
+                get 
                 {
-                    if (source == null)
-                        source = new Singleton();
-
-                    return source;
+                    if (instance == null) instance = new Singleton();
+                    return instance;
                 }
             }
+            private Singleton()
+            {
+            }
+
+            private static Singleton source = null;
+            private static readonly object threadlock = new object();
+            private static Singleton instance;
+            public void ShowDocsInfoFolder() 
+            {
+                DocxInfoFolder File = new DocxInfoFolder();
+                File.ShowInfoFolder();
+            }
+            public void ShowPdfInfoFolder() 
+            {
+                PdfileInfoFolder File = new PdfileInfoFolder();
+                File.ShowInfoFolder();
+            }
+            public void ShowXlsxInfoFolder() 
+            {
+                XlsxInfoFolder File = new XlsxInfoFolder();
+                File.ShowInfoFolder();
+            }
+            public void ShowTxtInfoFolder()
+            {
+                TxtInfoFolder File = new TxtInfoFolder();
+                File.ShowInfoFolder();
+            }
+            public void ShowHTMLInfoFolder()
+            {
+                HTMLInfoFolder File = new HTMLInfoFolder();
+                File.ShowInfoFolder();
+            }
+
         }
-    }
-    class Program
-    {
+        public abstract class InfoFolder
+        {
+            protected static string FilenameExtension = "null";
+            protected string FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+            protected string Author = "Not me";
+            protected string[] KeyWords = { "It's hard to explain", "I'm bored", "Plz kill me", "I hate to build redstone schemes", "My head is on fire" };
+            protected string Topic = "Some stuff";
+            protected string FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+
+            public virtual void ShowInfoFolder()
+            {
+            }
+        }
+
+        class DocxInfoFolder : InfoFolder
+        {
+            public override void ShowInfoFolder()
+            {
+                FilenameExtension = "docx";
+                FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+                FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+                Console.WriteLine("Filename Extension: ." + FilenameExtension);
+                Console.WriteLine("Name of file: " + FileName);
+                Console.WriteLine("File's author: " + Author);
+                Console.WriteLine("Keywords: ");
+                for (int NumberOfWord = 0; NumberOfWord < KeyWords.Length; ++NumberOfWord)
+                {
+                    Console.WriteLine((NumberOfWord + 1) + " - " + KeyWords[NumberOfWord]);
+                }
+                Console.WriteLine("Topic of file: " + Topic);
+                Console.WriteLine("Path to file: " + FilePath);
+            }
+        }
+        class PdfileInfoFolder : InfoFolder
+        {
+            public override void ShowInfoFolder()
+            {
+                FilenameExtension = "pdf";
+                FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+                FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+                Console.WriteLine("Filename Extension: ." + FilenameExtension);
+                Console.WriteLine("Name of file: " + FileName);
+                Console.WriteLine("File's author: " + Author);
+                Console.WriteLine("Keywords: ");
+                for (int NumberOfWord = 0; NumberOfWord < KeyWords.Length; ++NumberOfWord)
+                {
+                    Console.WriteLine((NumberOfWord + 1) + " - " + KeyWords[NumberOfWord]);
+                }
+                Console.WriteLine("Topic of file: " + Topic);
+                Console.WriteLine("Path to file: " + FilePath);
+            }
+        }
+        class XlsxInfoFolder : InfoFolder
+        {
+            public override void ShowInfoFolder()
+            {
+                FilenameExtension = "xlsx";
+                FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+                FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+                Console.WriteLine("Filename Extension: ." + FilenameExtension);
+                Console.WriteLine("Name of file: " + FileName);
+                Console.WriteLine("File's author: " + Author);
+                Console.WriteLine("Keywords: ");
+                for (int NumberOfWord = 0; NumberOfWord < KeyWords.Length; ++NumberOfWord)
+                {
+                    Console.WriteLine((NumberOfWord + 1) + " - " + KeyWords[NumberOfWord]);
+                }
+                Console.WriteLine("Topic of file: " + Topic);
+                Console.WriteLine("Path to file: " + FilePath);
+            }
+        }
+        class TxtInfoFolder : InfoFolder
+        {
+            public override void ShowInfoFolder()
+            {
+                FilenameExtension = "txt";
+                FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+                FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+                Console.WriteLine("Filename Extension: ." + FilenameExtension);
+                Console.WriteLine("Name of file: " + FileName);
+                Console.WriteLine("File's author: " + Author);
+                Console.WriteLine("Keywords: ");
+                for (int NumberOfWord = 0; NumberOfWord < KeyWords.Length; ++NumberOfWord)
+                {
+                    Console.WriteLine((NumberOfWord + 1) + " - " + KeyWords[NumberOfWord]);
+                }
+                Console.WriteLine("Topic of file: " + Topic);
+                Console.WriteLine("Path to file: " + FilePath);
+            }
+        }
+        class HTMLInfoFolder : InfoFolder
+        {
+            public override void ShowInfoFolder()
+            {
+                FilenameExtension = "html";
+                FileName = "It's " + FilenameExtension + "file." + FilenameExtension;
+                FilePath = "C:/User/Me/Homework/Really homework/New folder(3)/" + FilenameExtension + "file." + FilenameExtension;
+                Console.WriteLine("Filename Extension: ." + FilenameExtension);
+                Console.WriteLine("Name of file: " + FileName);
+                Console.WriteLine("File's author: " + Author);
+                Console.WriteLine("Keywords: ");
+                for (int NumberOfWord = 0; NumberOfWord < KeyWords.Length; ++NumberOfWord)
+                {
+                    Console.WriteLine((NumberOfWord + 1) + " - " + KeyWords[NumberOfWord]);
+                }
+                Console.WriteLine("Topic of file: " + Topic);
+                Console.WriteLine("Path to file: " + FilePath);
+            }
+        }
         static void Main(string[] args)
         {
-            int LengthOfArray = 1;
-            Console.WriteLine("Введите формат файла: ");
-            string FilenameExpansion = Convert.ToString(Console.ReadLine());
-            string MSWordFilenameExpansion = MSWordInfoFolder.FilenameExpansion;
-            string PDFFilenameExpansion = PDFileInfoFolder.FilenameExpansion;
-            string MSExcelFilenameExpansion = MSExcelInfoFolder.FilenameExpansion;
-            string TxtFilenameExpansion = TXTInfoFolder.FilenameExpansion;
-            string HTMLFilenameExpansion = HTMLInfoFolder.FilenameExpansion;
-            if (FilenameExpansion == MSWordFilenameExpansion)
-            {
-                Console.WriteLine("Введите имя файла: ");
-                string MSWordName = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите имя автора файла: ");
-                string MSWordAuthor = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите кодовые слова файла ('\0' для окончания ввода): ");
-                string[] MSWordKeyWords = new string[10];
-                for (int NumberOfWords = 0; NumberOfWords < LengthOfArray; ++NumberOfWords)
-                {
-                    MSWordKeyWords[NumberOfWords] = Convert.ToString(Console.ReadLine());
-                    if (MSWordKeyWords[NumberOfWords] == "\0")
-                    {
-                        break;
-                    } 
-                    else
-                    {
-                        ++LengthOfArray;
-                    }
-                }
-                Console.WriteLine("Введите тематику файла: ");
-                string MSWordTopic = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите путь к файлу: ");
-                string MSWordFilePath = Convert.ToString(Console.ReadLine());
-                Console.ReadKey();
+            Console.WriteLine("Enter Filename Extension ('d' for docx, 'p' for pdf, 'x' for xlsx, 't' for txt, 'h' for html): ");
+            char TypeOfFile = Convert.ToChar(Console.ReadLine());
+            switch (TypeOfFile) {
+                case 'd':
+                    Singleton.Instance.ShowDocsInfoFolder();
+                    break;
+                case 'p':
+                    Singleton.Instance.ShowPdfInfoFolder();
+                    break;
+                case 'x':
+                    Singleton.Instance.ShowXlsxInfoFolder();
+                    break;
+                case 't':
+                    Singleton.Instance.ShowTxtInfoFolder();
+                    break;
+                case 'h':
+                    Singleton.Instance.ShowHTMLInfoFolder();
+                    break;
+                default:
+                    Console.WriteLine("Wrong type of file!");
+                    break;
             }
-            else if (FilenameExpansion == PDFFilenameExpansion)
-            {
-                Console.WriteLine("Введите имя файла: ");
-                string PDFName = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите имя автора файла: ");
-                string PDFAuthor = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите кодовые слова файла ('\0' для окончания ввода): ");
-                string[] PDFKeyWords = new string[10];
-                for (int NumberOfWords = 0; NumberOfWords < LengthOfArray; ++NumberOfWords)
-                {
-                    PDFKeyWords[NumberOfWords] = Convert.ToString(Console.ReadLine());
-                    if (PDFKeyWords[NumberOfWords] == "\0")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        ++LengthOfArray;
-                    }
-                }
-                Console.WriteLine("Введите тематику файла: ");
-                string PDFTopic = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите путь к файлу: ");
-                string PDFFilePath = Convert.ToString(Console.ReadLine());
-                Console.ReadKey();
-            }
-            else if (FilenameExpansion == MSExcelFilenameExpansion)
-            {
-                Console.WriteLine("Введите имя файла: ");
-                string MSExcelName = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите имя автора файла: ");
-                string MSExcelAuthor = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите кодовые слова файла ('\0' для окончания ввода): ");
-                string[] MSExcelKeyWords = new string[10];
-                for (int NumberOfWords = 0; NumberOfWords < LengthOfArray; ++NumberOfWords)
-                {
-                    MSExcelKeyWords[NumberOfWords] = Convert.ToString(Console.ReadLine());
-                    if (MSExcelKeyWords[NumberOfWords] == "\0")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        ++LengthOfArray;
-                    }
-                }
-                Console.WriteLine("Введите тематику файла: ");
-                string MSExcelTopic = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите путь к файлу: ");
-                string MSExcelFilePath = Convert.ToString(Console.ReadLine());
-                Console.ReadKey();
-            }
-            else if (FilenameExpansion == TxtFilenameExpansion)
-            {
-                Console.WriteLine("Введите имя файла: ");
-                string TxtName = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите имя автора файла: ");
-                string TxtAuthor = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите кодовые слова файла ('\0' для окончания ввода): ");
-                string[] TxtKeyWords = new string[10];
-                for (int NumberOfWords = 0; NumberOfWords < LengthOfArray; ++NumberOfWords)
-                {
-                    TxtKeyWords[NumberOfWords] = Convert.ToString(Console.ReadLine());
-                    if (TxtKeyWords[NumberOfWords] == "\0")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        ++LengthOfArray;
-                    }
-                }
-                Console.WriteLine("Введите тематику файла: ");
-                string TxtTopic = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите путь к файлу: ");
-                string TxtFilePath = Convert.ToString(Console.ReadLine());
-                Console.ReadKey();
-            }
-            else if (FilenameExpansion == HTMLFilenameExpansion)
-            {
-                Console.WriteLine("Введите имя файла: ");
-                string HTMLName = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите имя автора файла: ");
-                string HTMLAuthor = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите кодовые слова файла ('\0' для окончания ввода): ");
-                string[] HTMLKeyWords = new string[10];
-                for (int NumberOfWords = 0; NumberOfWords < LengthOfArray; ++NumberOfWords)
-                {
-                    HTMLKeyWords[NumberOfWords] = Convert.ToString(Console.ReadLine());
-                    if (HTMLKeyWords[NumberOfWords] == "\0")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        ++LengthOfArray;
-                    }
-                }
-                Console.WriteLine("Введите тематику файла: ");
-                string HTMLTopic = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите путь к файлу: ");
-                string HTMLFilePath = Convert.ToString(Console.ReadLine());
-                Console.ReadKey();
-            } 
-            else
-            {
-                Console.WriteLine("Неверный формат файла.");
-                Console.ReadKey();
-            }
+            Console.ReadKey();
         }
     }
 }
